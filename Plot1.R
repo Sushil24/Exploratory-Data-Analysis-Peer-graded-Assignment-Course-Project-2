@@ -1,0 +1,13 @@
+## Question No. 1 - Total Emissions
+setwd("C:/Users/user/coursera/My Rcodes/Data")
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+year_Wise_PM25<- tapply(NEI$Emissions, NEI$year,sum)
+year_Wise_PM25<- as.data.frame.table(year_Wise_PM25)
+colnames(year_Wise_PM25)<- c("Year","Emission")
+options(scipen=5)
+year_Wise_PM25$Year<- as.character(year_Wise_PM25$Year)
+year_Wise_PM25$Emission<- as.character(year_Wise_PM25$Emission)
+plot(year_Wise_PM25$Year,year_Wise_PM25$Emission, type="l", xlab = "Years", ylab= "Emissions", main = "Total Emission")
+dev.copy(png,"plot1.png")
+dev.off()
