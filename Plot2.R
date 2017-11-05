@@ -1,0 +1,13 @@
+## Question No.2 - Emissions in Maryland
+setwd("C:/Users/user/coursera/My Rcodes/Data")
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+maryland<- subset(NEI,NEI$fips=="24510")
+maryland<- tapply(maryland$Emissions,maryland$year,sum)
+maryland<- as.data.frame.table(maryland)
+colnames(maryland)<- c("Year","Emission")
+maryland$Year<-as.character(maryland$Year)
+maryland$Emission<- as.character(maryland$Emission)
+with(maryland,plot(Year,Emission, type = "l",xlab = "years", ylab = "Emission", main = "Maryland Emission"))
+dev.copy(png,"plot2.png")
+dev.off()
