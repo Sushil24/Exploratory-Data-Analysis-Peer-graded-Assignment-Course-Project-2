@@ -1,0 +1,10 @@
+##Question No. 3 - Sources of Emission in Baltimore City
+setwd("C:/Users/user/coursera/My Rcodes/Data")
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+library(ggplot2)
+baltimore<- subset(NEI, fips=="24510")
+g<-ggplot(baltimore,aes(year, Emissions, color= type))
+g+geom_line(stat="summary", fun.y="sum")+ labs(y=" Emissions", x= "year")
+dev.copy(png,"plot3.png")
+dev.off()
